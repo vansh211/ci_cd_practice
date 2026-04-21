@@ -15,3 +15,6 @@ jobs:
       
       - name: check node version
         run: node -v
+
+      - name: installing node
+        run: npm install
