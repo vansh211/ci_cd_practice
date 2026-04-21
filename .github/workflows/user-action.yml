@@ -1,0 +1,17 @@
+name: use action workflow
+on: push
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout code
+        uses: actions/checkout@v4
+
+      - name: list file
+        run: ls
+      
+      - name: setup node
+        uses: actions/setup-node@v4
+      
+      - name: check node version
+        run: node -v
