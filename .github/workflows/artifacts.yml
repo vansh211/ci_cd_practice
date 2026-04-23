@@ -1,16 +1,29 @@
-name: artifacts workflow
+name: artifacts
 on: push
 
 jobs:
-  build:
+  job1:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Setup Node
-        uses: actions/setup-node@v4
+      - name: create a file
+        run: echo "Hello world" > file.txt
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
         with:
-          node-version: 20
-          cache: 'npm'
+          name: my-artifact
+          path: file.txt
+          
+  job2:
+    runs-on: ubuntu-latest
+    needs: job1
+
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: my-artifact  
+
+          // add step tp read file.txt
+      - name: Read file
+        run: cat file.txt
